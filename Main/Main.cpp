@@ -1,12 +1,14 @@
+// Copyright 2021 Wojciech Replin. All rights reserved.
+
 #include "Main/Main.hpp"
 
 #include <memory>
 #include <set>
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include "GL/glew.h"
+#include "GLFW/glfw3.h"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 namespace Boids {
 namespace {
@@ -14,13 +16,14 @@ bool main_running = false;
 constexpr glm::vec3 kUp{0.f, 1.f, 0.f};
 
 struct {
-  float width = 2 * 1280.f, height = 2 * 960.f;
-  float aspect = width / height;
+  int width = 2 * 1280, height = 2 * 960;
+  float aspect = static_cast<float>(width) / static_cast<float>(height);
 } window_properties;
 void OnResize(GLFWwindow*, int width, int height) {
   glViewport(0, 0, window_properties.width = width,
              window_properties.height = height);
-  window_properties.aspect = window_properties.width / window_properties.height;
+  window_properties.aspect = static_cast<float>(window_properties.width) /
+                             static_cast<float>(window_properties.height);
 }
 
 struct WindowDestroyer {
@@ -61,7 +64,9 @@ int Main::Run() {
   glEnable(GL_CULL_FACE);
   glCullFace(GL_BACK);
   glfwSetInputMode(window.get(), GLFW_STICKY_KEYS, GL_TRUE);
-  glClearColor(44.0f / 255.0f, 219.0f / 255.0f, 216.0f / 255.0f, 0.0f);
+  constexpr auto red = 44.0f / 255.0f, green = 219.0f / 255.0f,
+                 blue = 216.0f / 255.0f;
+  glClearColor(red, green, blue, 0.0f);
 
   do {
     glfwPollEvents();

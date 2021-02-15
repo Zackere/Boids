@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(Boids LANGUAGES CXX)
-# set(CMAKE_CXX_CLANG_TIDY clang-tidy -checks=-*,cert-*,cppcoreguidelines-*,clang-analyzer-*,performance-*,modernize-*,bugprone-*)
-# set(CMAKE_CXX_CPPLINT "cpplint")
+set(CMAKE_CXX_CLANG_TIDY clang-tidy -checks=-*,cert-*,cppcoreguidelines-*,clang-analyzer-*,performance-*,cppcoreguidelines-*,bugprone-*)
+set(CMAKE_CXX_CPPLINT "cpplint")
 
 include_directories(${CMAKE_SOURCE_DIR})
 file(GLOB source_files
